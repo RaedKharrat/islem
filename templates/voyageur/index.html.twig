@@ -1,0 +1,43 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Voyageur index{% endblock %}
+
+{% block body %}
+    <h1>Voyageur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumPass</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                <th>EtatCivil</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyageur in voyageurs %}
+            <tr>
+                <td>{{ voyageur.id }}</td>
+                <td>{{ voyageur.NumPass }}</td>
+                <td>{{ voyageur.Nom }}</td>
+                <td>{{ voyageur.Prenom }}</td>
+                <td>{{ voyageur.Age }}</td>
+                <td>{{ voyageur.EtatCivil }}</td>
+                <td>
+                    <a href="{{ path('app_voyageur_show', {'id': voyageur.id}) }}">show</a>
+                    <a href="{{ path('app_voyageur_edit', {'id': voyageur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voyageur_new') }}">Create new</a>
+{% endblock %}
