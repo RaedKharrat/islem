@@ -6,13 +6,17 @@ use App\Entity\Voyage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class VoyageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Programme')
+        ->add('Programme', TextareaType::class, [
+            'attr' => ['rows' => 3], // Adjust rows as needed
+        ])           
             ->add('DateDepart')
             ->add('DateArrive')
             ->add('Prix')

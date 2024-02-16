@@ -21,6 +21,23 @@ class VoyageurRepository extends ServiceEntityRepository
         parent::__construct($registry, Voyageur::class);
     }
 
+    public function findAllAscending(string $criteria): array
+    {
+        return $this->createQueryBuilder('v')
+            ->orderBy($criteria, 'ASC') // Replace 'fieldToSortBy' with the actual field name you want to sort by
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllDescending(string $criteria): array
+    {
+        return $this->createQueryBuilder('v')
+            ->orderBy($criteria, 'DESC') // Replace 'fieldToSortBy' with the actual field name you want to sort by
+            ->getQuery()
+            ->getResult();
+    }
+
+
 //    /**
 //     * @return Voyageur[] Returns an array of Voyageur objects
 //     */

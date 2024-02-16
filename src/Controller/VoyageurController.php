@@ -22,6 +22,43 @@ class VoyageurController extends AbstractController
         ]);
     }
 
+    #[Route('/search', name: 'app_search_voyageur', methods: ['POST'])]
+    public function searchAction(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $query = $request->request->get('query'); // Get the search query from the form input
+    
+        // Create a DQL query to filter reclamations based on recText
+        $dql = "SELECT v FROM App\Entity\Voyageur v WHERE v.Nom LIKE :query OR v.Prenom LIKE :query";
+        
+        // Execute the DQL query
+        $voyageurs = $entityManager->createQuery($dql)
+            ->setParameter('query', '%' . $query . '%')
+            ->getResult();
+    
+        // Render the 'index.html.twig' template with the filtered reclamations
+        return $this->render('Voyageur/index.html.twig', [
+            'voyageurs' => $voyageurs,
+        ]);
+    }
+    
+    #[Route('/trieasc', name: 'app_trieasc', methods: ['GET'])]
+    public function ascendingAction(VoyageurRepository $voyageurRepository)
+    {
+        return $this->render('voyageur/index.html.twig', [
+            'voyageurs' => $voyageurRepository->findAllAscending("v.EtatCivil"),
+        ]);
+    }
+    
+    #[Route('/triedesc', name: 'app_triedesc', methods: ['GET'])]
+    public function descendingAction(VoyageurRepository $voyageurRepository)
+    {
+       
+        return $this->render('voyageur/index.html.twig', [
+            'voyageurs' => $voyageurRepository->findAllDescending("v.EtatCivil"),
+        ]);
+    
+    }
+
     #[Route('/new', name: 'app_voyageur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

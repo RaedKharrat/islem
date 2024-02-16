@@ -25,8 +25,9 @@
                 <td>{{ voyage.DateArrive ? voyage.DateArrive|date('Y-m-d') : '' }}</td>
                 <td>{{ voyage.Prix }}</td>
                 <td>
-                    <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}">show</a>
-                    <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}">edit</a>
+                    <a href="{{ path('app_voyage_show', {'id': voyage.id}) }}" class="btn btn-success" style="border-radius: 10px;">show</a>
+                    <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}" class="btn btn-warning" style="border-radius: 10px;">edit</a>
+                    <a href="{{ path('app_voyage_edit', {'id': voyage.id}) }}" class="btn btn-danger" style="border-radius: 10px;">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_voyage_new') }}">Create new</a>
+    <a href="{{ path('app_voyage_new') }}" class="bi bi-cart-plus" style="border-radius: 10px;">Create new</a>
 {% endblock %}

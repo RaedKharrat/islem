@@ -58,13 +58,13 @@
 
  
     <!-- templates/reclamation/search.html.twig -->
-{# <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="{{ path('app_search_reclamation') }}">
+<div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="{{ path('app_search_voyageur') }}">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
     
-</div> #}
+</div>
 
 
     <nav class="header-nav ms-auto">
@@ -76,7 +76,7 @@
           </a>
         </li><!-- End Search Icon-->
 
-        {# <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
@@ -149,7 +149,7 @@
 
           </ul><!-- End Notification Dropdown Items -->
 
-        </li><!-- End Notification Nav --> #}
+        </li><!-- End Notification Nav -->
 
         {# <li class="nav-item dropdown">
 
@@ -298,23 +298,23 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="">
+            <a href="{{ path('app_voyage_index') }}">
               <i class="bi bi-circle"></i><span>All Voyage</span>
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{{ path('app_voyageur_index') }}">
               <i class="bi bi-circle"></i><span>All Voyageur</span>
             </a>
           </li>
           <li>
-            <a href=" ">
-              <i class="bi bi-circle"></i><span>Add new Reclamation as Admin</span>
+            <a href="{{ path('app_voyage_new') }}">
+              <i class="bi bi-circle"></i><span>Add new Voyage as Admin</span>
             </a>
           </li>
           <li>
-            <a href="">
-              <i class="bi bi-circle"></i><span>Add new Reservation as Admin</span>
+            <a href="{{ path('app_voyageur_new') }}">
+              <i class="bi bi-circle"></i><span>Add new Voyageur to voyage as Admin</span>
             </a>
           </li>
           {# <li>

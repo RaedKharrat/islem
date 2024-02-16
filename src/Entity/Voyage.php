@@ -89,33 +89,33 @@ class Voyage
         return $this;
     }
 
-    /**
-     * @return Collection<int, Voyageur>
-     */
-    public function getVoyagee(): Collection
-    {
-        return $this->Voyagee;
-    }
+    // /**
+    //  * @return Collection<int, Voyageur>
+    //  */
+    // public function getVoyagee(): Collection
+    // {
+    //     return $this->Voyagee;
+    // }
 
-    public function addVoyagee(Voyageur $voyagee): static
-    {
-        if (!$this->Voyagee->contains($voyagee)) {
-            $this->Voyagee->add($voyagee);
-            $voyagee->setVoyage($this);
-        }
+    // public function addVoyagee(Voyageur $voyagee): static
+    // {
+    //     if (!$this->Voyagee->contains($voyagee)) {
+    //         $this->Voyagee->add($voyagee);
+    //         $voyagee->setVoyage($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeVoyagee(Voyageur $voyagee): static
-    {
-        if ($this->Voyagee->removeElement($voyagee)) {
-            // set the owning side to null (unless already changed)
-            if ($voyagee->getVoyage() === $this) {
-                $voyagee->setVoyage(null);
-            }
-        }
+    // public function removeVoyagee(Voyageur $voyagee): static
+    // {
+    //     if ($this->Voyagee->removeElement($voyagee)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($voyagee->getVoyage() === $this) {
+    //             $voyagee->setVoyage(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

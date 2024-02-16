@@ -6,6 +6,10 @@ use App\Entity\Voyageur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+
 
 class VoyageurType extends AbstractType
 {
@@ -13,11 +17,17 @@ class VoyageurType extends AbstractType
     {
         $builder
             ->add('NumPass')
-            ->add('Nom')
-            ->add('Prenom')
+            ->add('Nom', TextType::class) 
+            ->add('Prenom', TextType::class)
             ->add('Age')
-            ->add('EtatCivil')
-            ->add('voyage')
+            ->add('EtatCivil', ChoiceType::class, [
+                'choices' => [
+                    'Single' => 'Single',
+                    'Married' => 'Married',
+                    'Divorced' => 'Divorced',
+                    'Widowed' => 'Widowed',
+                ],
+            ]);            // ->add('voyage')
         ;
     }
 
