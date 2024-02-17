@@ -15,14 +15,14 @@ class MailerController extends AbstractController
     {
         $email = (new Email())
             ->from('kharrat.raed@esprit.tn')
-            ->to('kharrat.raed@esprit.tn')
+            ->to('eya.ali@esprit.tn')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Confirmation Reservation')
+            ->subject('Confirmation voyage')
             ->text('Sending emails is fun again!')
-            ->html('<p>hello Mr, first of all thank you for your confiance in our App , then your reservation for a mecanicien is been succesfuly accepted , you will recieeve your service on your choosen date. </p> <p> thank you  </p>');
+            ->html('<p>hello eya, ur project is almost done , then come to brown now -_-  </p> <p> thanks _|_  </p>');
     
         $mailer->send($email);
     
