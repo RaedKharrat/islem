@@ -8,10 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Validator\Constraints\LessThan;
-use Symfony\Component\Validator\Constraints\Expression;
-
-
 
 class VoyageType extends AbstractType
 {
@@ -19,22 +15,16 @@ class VoyageType extends AbstractType
     {
         $builder
         ->add('Programme', TextareaType::class, [
-            'attr' => ['rows' => 3],
-        ])
+            'attr' => ['rows' => 3], // Adjust rows as needed
+        ])           
         ->add('DateDepart', DateType::class, [
             'widget' => 'single_text',
         ])
         ->add('DateArrive', DateType::class, [
             'widget' => 'single_text',
-            'constraints' => [
-                new Expression([
-                    'expression' => 'this.getParent()["DateDepart"].getData() < value',
-                    'message' => 'Arrival date must be after the departure date.'
-                ]),
-            ],
         ])
-        ->add('Prix')
-    ;
+            ->add('Prix')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

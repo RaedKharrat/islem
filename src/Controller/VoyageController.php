@@ -78,4 +78,28 @@ class VoyageController extends AbstractController
 
         return $this->redirectToRoute('app_voyage_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+//    #[Route('/statistique', name: 'app_voyage_statistique', methods: ['GET'])]
+//     public function statistique(VoyageRepository $voyageRepository): Response
+//     {
+//         $statistics = $voyageRepository->findStatistics();
+        
+//         return $this->render('voyage/stat.html.twig', [
+//             'statistics' => $statistics,
+//         ]);
+//     }
+    #[Route('/stats', name: 'app_stat', methods: ['GET'])]
+    public function statistics(VoyageRepository $voyageRepository): Response
+    {
+        $data = $voyageRepository->createQueryBuilder('v')
+            ->select('v.DateArrive, COUNT(v.id) as count')
+            ->groupBy('v.DateArrive')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('voyage/stat.html.twig', [
+            'data' => $data,
+        ]);
+    }
 }

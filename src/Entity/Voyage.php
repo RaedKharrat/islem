@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Repository\VoyageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VoyageRepository::class)]
 class Voyage
@@ -19,10 +19,10 @@ class Voyage
     #[ORM\Column(length: 255)]
     private ?string $Programme = null;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateDepart = null;
 
-    #[ORM\Column(type: "date")]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateArrive = null;
 
     #[ORM\Column(length: 255)]
@@ -46,7 +46,7 @@ class Voyage
         return $this->Programme;
     }
 
-    public function setProgramme(string $Programme): self
+    public function setProgramme(string $Programme): static
     {
         $this->Programme = $Programme;
 
@@ -58,7 +58,7 @@ class Voyage
         return $this->DateDepart;
     }
 
-    public function setDateDepart(\DateTimeInterface $DateDepart): self
+    public function setDateDepart(\DateTimeInterface $DateDepart): static
     {
         $this->DateDepart = $DateDepart;
 
@@ -70,7 +70,7 @@ class Voyage
         return $this->DateArrive;
     }
 
-    public function setDateArrive(\DateTimeInterface $DateArrive): self
+    public function setDateArrive(\DateTimeInterface $DateArrive): static
     {
         $this->DateArrive = $DateArrive;
 
@@ -82,22 +82,12 @@ class Voyage
         return $this->Prix;
     }
 
-    public function setPrix(string $Prix): self
+    public function setPrix(string $Prix): static
     {
         $this->Prix = $Prix;
 
         return $this;
     }
-
-    /**
-     * @Assert\LessThan(propertyPath="DateArrive", message="Departure date must be before the arrival date.")
-     */
-    public function isDateDepartValid(): bool
-    {
-        return $this->DateDepart < $this->DateArrive;
-    }
-}
-
 
     // /**
     //  * @return Collection<int, Voyageur>
@@ -128,4 +118,4 @@ class Voyage
 
     //     return $this;
     // }
-
+}
