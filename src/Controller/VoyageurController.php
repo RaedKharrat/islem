@@ -115,4 +115,32 @@ class VoyageurController extends AbstractController
 
         return $this->redirectToRoute('app_voyageur_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/stats', name: 'app_stattt', methods: ['GET'])]
+    public function statistics(VoyageurRepository $voyageurRepository)
+    {
+        $repository = $this->getDoctrine()->getRepository(Voyageur::class);
+    
+        $data = $repository->createQueryBuilder('v')
+            ->select('v.EtatCivil')
+            ->addSelect('COUNT(v.id) as totalEtatCivil')
+
+            ->addSelect('SUM(CASE WHEN v.EtatCivil = :Single THEN 1 ELSE 0 END) as SingleCount')
+            ->addSelect('SUM(CASE WHEN v.EtatCivil = :Married THEN 1 ELSE 0 END) as MarriedCount')
+            ->addSelect('SUM(CASE WHEN v.EtatCivil = :Divorced THEN 1 ELSE 0 END) as DivorcedCount')
+            ->addSelect('SUM(CASE WHEN v.EtatCivil = :Widowed THEN 1 ELSE 0 END) as WidowedCount')
+
+            ->setParameter('Single', 'Single')
+            ->setParameter('Married', 'Married')
+            ->setParameter('Divorced', 'Divorced')
+            ->setParameter('Widowed', 'Widowed')
+
+            ->groupBy('v.EtatCivil')
+            ->getQuery()
+            ->getResult();
+    
+        return $this->render('voyageur/chart.html.twig', [
+            'data' => $data,
+        ]);
+    }
 }
