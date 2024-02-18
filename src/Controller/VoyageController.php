@@ -89,17 +89,17 @@ class VoyageController extends AbstractController
 //             'statistics' => $statistics,
 //         ]);
 //     }
-    #[Route('/stats', name: 'app_stat', methods: ['GET'])]
-    public function statistics(VoyageRepository $voyageRepository): Response
-    {
-        $data = $voyageRepository->createQueryBuilder('v')
-            ->select('v.DateArrive, COUNT(v.id) as count')
-            ->groupBy('v.DateArrive')
-            ->getQuery()
-            ->getResult();
+    // #[Route('/stats', name: 'app_stat', methods: ['GET'])]
+    // public function statistics(VoyageRepository $voyageRepository): Response
+    // {
+    //     $data = $voyageRepository->createQueryBuilder('v')
+    //         ->select('v.DateArrive, COUNT(v.id) as count')
+    //         ->groupBy('v.DateArrive')
+    //         ->getQuery()
+    //         ->getResult();
 
-        return $this->render('voyage/stat.html.twig', [
-            'data' => $data,
-        ]);
-    }
+    //     return $this->render('voyage/stat.html.twig', [
+    //         'data' => $data,
+    //     ]);
+    // }
 }

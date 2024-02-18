@@ -14,7 +14,7 @@ class MailerController extends AbstractController
     public function sendEmail(MailerInterface $mailer): Response
     {
         $email = (new Email())
-            ->from('kharrat.raed@esprit.tn')
+            ->from('zevvbbejahzgeu@zehurgze')
             ->to('eya.ali@esprit.tn')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
@@ -22,7 +22,7 @@ class MailerController extends AbstractController
             //->priority(Email::PRIORITY_HIGH)
             ->subject('Confirmation voyage')
             ->text('Sending emails is fun again!')
-            ->html('<p>hello eya, ur project is almost done , then come to brown now -_-  </p> <p> thanks _|_  </p>');
+            ->html('<p>hello voyageur, ur flight is well noted , thanks very nice :*</p>');
     
         $mailer->send($email);
     

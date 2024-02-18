@@ -5,3 +5,7 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+App\Controller\VoyageurController::statistics:
+    path: '/voyageur/stats'
+    methods: ['GET']
