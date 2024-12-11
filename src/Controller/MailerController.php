@@ -10,19 +10,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MailerController extends AbstractController
 {
-    #[Route('voyageur/sendmail/{id}', name: 'mailing',methods: ['GET'])]
+    #[Route('produit/sendmail/{id}', name: 'mailing',methods: ['GET'])]
     public function sendEmail(MailerInterface $mailer): Response
     {
         $email = (new Email())
-            ->from('zevvbbejahzgeu@zehurgze')
-            ->to('eya.ali@esprit.tn')
+            ->from('kharrat.raed@esprit.tn')
+            ->to('wiem.ayari@esprit.tn')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Confirmation voyage')
+            ->subject('Produit jdid')
             ->text('Sending emails is fun again!')
-            ->html('<p>hello voyageur, ur flight is well noted , thanks very nice :*</p>');
+            ->html('<p>hello customers, u have a new product</p>');
     
         $mailer->send($email);
     

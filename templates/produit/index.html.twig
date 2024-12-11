@@ -1,0 +1,94 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">Product List</h1>
+<div>
+                        <a href="{{ path('app_trasc') }}" class="btn btn-outline-success btn-sm mx-2">Sort by Price (Asc)</a>
+                        <a href="{{ path('app_trdesc') }}" class="btn btn-outline-danger btn-sm">Sort by Price (Desc)</a>
+                    </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>All Products</h4>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#search-input').on('keyup', function () {
+                            var value = $(this).val().toLowerCase();
+                            $('table tbody tr').filter(function () {
+                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                            });
+                        });
+                    });
+                </script>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <input type="text" id="search-input" class="form-control" placeholder="Search Products" style="width: 50%;">
+
+                    <!-- Sorting buttons -->
+                    
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Rate</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produits %}
+                                <tr>
+                                    <td>{{ produit.id }}</td>
+                                    <td>{{ produit.nom }}</td>
+                                    <td>{{ produit.description }}</td>
+                                    <td>${{ produit.prix|number_format(2, '.', ',') }}</td>
+                                    <td>
+                                        {% if produit.image %}
+                                            <img src="{{ asset(produit.image) }}" alt="{{ produit.nom }}" class="img-thumbnail" style="width: 50px; height: 50px;">
+                                        {% else %}
+                                            <span class="text-muted">No Image</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ produit.rate }}/5</td>
+                                    <td>
+                                        <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info btn-sm">
+                                            <i class="bi bi-eye"></i> Show
+                                        </a>
+                                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a href="{{ path('mailing', {'id': produit.id}) }}" class="btn btn-success">
+                                            <strong>Send Notification</strong>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">No records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a href="{{ path('app_produit_new') }}" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Create New
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
